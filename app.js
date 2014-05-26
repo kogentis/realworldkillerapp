@@ -107,10 +107,13 @@
 	                                    visible: true
 	                                });
 	                            	
-	                            	google.maps.event.addListener(marker, 'click', function() {
-	                            		infowindow.open(map,marker);
-	                            	});
-	                            });
+	                            	google.maps.event.addListener(marker, 'click', (function(marker) {
+	                                        return function() {
+	                                        	infowindow.setContent(contentString);
+	                                        	infowindow.open(map,marker);
+	                                       }
+	                            	})(marker));
+	                            }); //store each
                             }, this);
                         	}
                         }
